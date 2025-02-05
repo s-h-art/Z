@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.H Art Quizz</title>
+    <link rel="icon" href="https://via.placeholder.com/150" type="image/png"> <!-- Remplacez par l'URL de votre icône -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Menu */
+        .menu-bar {
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 10px 20px;
+        }
+
+        .menu-bar .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .menu-bar .menu-links {
+            display: none;
+            flex-direction: column;
+            background-color: #333;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            width: 200px;
+            border-radius: 5px;
+        }
+
+        .menu-bar .menu-links a {
+            color: white;
+            padding: 14px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu-bar .menu-links a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Logo et Titre */
+        #title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        /* Fenêtre d'info "Sur nous" */
+        .info-window, .contact-info-window {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            border-radius: 8px;
+            z-index: 1001;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .info-window h2, .contact-info-window h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .info-window p, .contact-info-window p {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Fermeture des fenêtres */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Quiz */
+        #quiz-container {
+            padding: 80px 20px 20px 20px;
+        }
+
+        #question {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .choices button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 80%;
+            display: block;
+            margin: 10px auto;
+            transition: background-color 0.3s;
+        }
+
+        .choices button:hover {
+            background-color: #45a049;
+        }
+
+        #score {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Langues et Thème */
+        .language-theme {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1002;
+        }
+
+        .language-theme button {
+            background: none;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        /* Thème sombre/clair */
+        .dark-theme {
+            background-color: #333;
+            color: white;
+        }
+
+        .light-theme {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de navigation -->
+    <div class="menu-bar">
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+        <div class="menu-links">
+            <a href="#">Accueil</a>
+            <a href="#" onclick="showInfo()">Sur Nous</a>
+            <a href="#">Autre Jeux</a>
+            <a href="#" onclick="showContactInfo()">Contact Informations</a>
+        </div>
+    </div>
+
+    <!-- Titre du quiz -->
+    <div id="title">S.H Art Quizz</div>
+
+    <!-- Fenêtre d'info "Sur nous" -->
+    <div id="info-window" class="info-window">
+        <button class="close-btn" onclick="closeInfo()">X</button>
+        <h2>À propos de S.H Art</h2>
+        <p>S.H Art est une compagnie créée par Houche Saïd en Algérie. Il est un artiste dessinateur et un développeur web passionné.</p>
+    </div>
+
+    <!-- Fenêtre des informations de contact -->
+    <div id="contact-info-window" class="contact-info-window">
+        <button class="close-btn" onclick="closeContactInfo()">X</button>
+        <h2>Contact Informations</h2>
+        <p>Email: <a href="mailto:S.H_art@outlook.com" style="color: #fff;">S.H_art@outlook.com</a></p>
+        <p>Numéro: +213783339471</p>
+    </div>
+
+    <!-- Boutons pour changer la langue et le thème -->
+    <div class="language-theme">
+        <button onclick="changeLanguage('fr')">Fr</button>
+        <button onclick="changeLanguage('ar')">عربي</button>
+        <button onclick="changeLanguage('en')">En</button>
+        <button onclick="toggleTheme()">🌙</button>
+    </div>
+
+    <!-- Contenu du quiz -->
+    <div id="quiz-container">
+        <h1>S.H Art Quizz</h1>
+        <div id="question"></div>
+        <div id="choices" class="choices"></div>
+        <button id="next" onclick="nextQuestion()">Suivant</button>
+        <div id="score"></div>
+    </div>
+
+    <footer>
+        <p>2025 © Tous les droits sont réservés - S.H Art</p>
+        <div>
+            <a href="https://www.facebook.com/profile.php?id=61557417475097" target="_blank">Facebook</a> |
+            <a href="https://www.instagram.com/s.h___art?igsh=MTV4aWw4OHhmaWtldw==" target="_blank">Instagram</a> |
+            <a href="https://youtube.com/@houche.said?si=t2JlPG5qohIbKnL8" target="_blank">YouTube</a>
+        </div>
+    </footer>
+
+    <script>
+        // Liste des questions de quiz (20 questions)
+        const questions = [
+            { question: "Quel est le plus grand océan du monde ?", choices: ["Atlantique", "Indien", "Arctique", "Pacifique"], answer: "Pacifique" },
+            { question: "Qui a écrit 'Les Misérables' ?", choices: ["Victor Hugo", "Emile Zola", "Molière", "Balzac"], answer: "Victor Hugo" },
+            { question: "Quel est le plus grand désert du monde ?", choices: ["Sahara", "Arctique", "Désert de Gobi", "Kalahari"], answer: "Sahara" },
+            { question: "Qui a inventé l'électricité ?", choices: ["Albert Einstein", "Nikola Tesla", "Thomas Edison", "Benjamin Franklin"], answer: "Nikola Tesla" },
+            { question: "Quel pays est le plus peuplé ?", choices: ["Chine", "Inde", "USA", "Russie"], answer: "Chine" },
+            { question: "Quelle est la capitale de la France ?", choices: ["Berlin", "Madrid", "Paris", "Rome"], answer: "Paris" },
+            { question: "Qui a peint la Mona Lisa ?", choices: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"], answer: "Leonardo da Vinci" },
+            { question: "En quelle année a eu lieu la Révolution française ?", choices: ["1789", "1776", "1815", "1799"], answer: "1789" },
+            { question: "Quel est le plus grand pays du monde ?", choices: ["Chine", "Canada", "Russie", "USA"], answer: "Russie" },
+            { question: "Quel est l'élément chimique dont le symbole est 'O' ?", choices: ["Or", "Oxygène", "Ozone", "Osmium"], answer: "Oxygène" },
+            { question: "Qui a écrit '1984' ?", choices: ["George Orwell", "Aldous Huxley", "Ray Bradbury", "J.R.R. Tolkien"], answer: "George Orwell" },
+            { question: "Quel est le plus long fleuve du monde ?", choices: ["Nil", "Amazone", "Yangtsé", "Mississippi"], answer: "Nil" },
+            { question: "Quel pays a inventé les Jeux Olympiques ?", choices: ["France", "Grèce", "Italie", "Allemagne"], answer: "Grèce" },
+            { question: "Quelle est la plus haute montagne du monde ?", choices: ["K2", "Everest", "Mont Blanc", "Makalu"], answer: "Everest" },
+            { question: "En quelle année a été lancée la première mission spatiale humaine ?", choices: ["1961", "1957", "1969", "1975"], answer: "1961" },
+            { question: "Quel est l'instrument utilisé pour mesurer la température ?", choices: ["Baromètre", "Thermomètre", "Anémomètre", "Hygromètre"], answer: "Thermomètre" },
+            { question: "Qui a fondé Microsoft ?", choices: ["Steve Jobs", "Bill Gates", "Elon Musk", "Mark Zuckerberg"], answer: "Bill Gates" },
+            { question: "Quel est l'animal le plus rapide du monde ?", choices: ["Guépard", "Lion", "Aigle", "Requin blanc"], answer: "Guépard" },
+            { question: "Combien de continents existe-t-il sur Terre ?", choices: ["5", "6", "7", "8"], answer: "7" },
+            { question: "Quel est l'organe principal de la respiration chez l'humain ?", choices: ["Poumons", "Cœur", "Reins", "Foie"], answer: "Poumons" },
+            { question: "Quelle est la première lettre de l'alphabet ?", choices: ["A", "B", "C", "Z"], answer: "A" },
+            { question: "Qui a découvert l'Amérique ?", choices: ["Christophe Colomb", "Marco Polo", "Ferdinand Magellan", "Hernan Cortés"], answer: "Christophe Colomb" }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        // Fonction pour charger une question
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').textContent = q.question;
+
+            const choicesDiv = document.getElementById('choices');
+            choicesDiv.innerHTML = '';
+            q.choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.textContent = choice;
+                button.onclick = () => checkAnswer(choice);
+                choicesDiv.appendChild(button);
+            });
+        }
+
+        // Vérifier la réponse
+        function checkAnswer(choice) {
+            const q = questions[currentQuestion];
+            if (choice === q.answer) {
+                score++;
+            }
+            document.getElementById('score').textContent = `Score: ${score}/${questions.length}`;
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                document.getElementById('score').textContent = `Quiz terminé! Ton score est ${score}/${questions.length}.`;
+            }
+        }
+
+        // Passer à la question suivante
+        function nextQuestion() {
+            loadQuestion();
+        }
+
+        // Afficher/fermer le menu
+        function toggleMenu() {
+            const links = document.querySelector('.menu-links');
+            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Afficher la fenêtre "Sur Nous"
+        function showInfo() {
+            document.getElementById('info-window').style.display = 'block';
+        }
+
+        // Fermer la fenêtre "Sur Nous"
+        function closeInfo() {
+            document.getElementById('info-window').style.display = 'none';
+        }
+
+        // Afficher la fenêtre "Contact Informations"
+        function showContactInfo() {
+            document.getElementById('contact-info-window').style.display = 'block';
+        }
+
+        // Fermer la fenêtre "Contact Informations"
+        function closeContactInfo() {
+            document.getElementById('contact-info-window').style.display = 'none';
+        }
+
+        // Changer la langue
+        function changeLanguage(language) {
+            // Implémenter le changement de langue ici
+            alert("Langue changée à: " + language);
+        }
+
+        // Changer le thème
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            document.body.classList.toggle('light-theme');
+        }
+
+        // Charger la première question
+        loadQuestion();
+    </script>
+</body>
+</html>
