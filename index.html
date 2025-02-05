@@ -1,359 +1,369 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.H Art Quizz</title>
-    <link rel="icon" href="https://via.placeholder.com/150" type="image/png"> <!-- Remplacez par l'URL de votre icône -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Menu */
-        .menu-bar {
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 10px 20px;
-        }
-
-        .menu-bar .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-            color: white;
-        }
-
-        .menu-bar .menu-links {
-            display: none;
-            flex-direction: column;
-            background-color: #333;
-            position: absolute;
-            top: 60px;
-            right: 20px;
-            width: 200px;
-            border-radius: 5px;
-        }
-
-        .menu-bar .menu-links a {
-            color: white;
-            padding: 14px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .menu-bar .menu-links a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        /* Logo et Titre */
-        #title {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            font-weight: 700;
-            text-align: center;
-            margin-top: 50px;
-            color: #333;
-        }
-
-        /* Fenêtre d'info "Sur nous" */
-        .info-window, .contact-info-window {
-            display: none;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 20px;
-            position: fixed;
-            top: 20%;
-            left: 20%;
-            width: 60%;
-            border-radius: 8px;
-            z-index: 1001;
-            max-height: 80%;
-            overflow-y: auto;
-        }
-
-        .info-window h2, .contact-info-window h2 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .info-window p, .contact-info-window p {
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        /* Fermeture des fenêtres */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 18px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* Quiz */
-        #quiz-container {
-            padding: 80px 20px 20px 20px;
-        }
-
-        #question {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .choices button {
-            margin: 10px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            width: 80%;
-            display: block;
-            margin: 10px auto;
-            transition: background-color 0.3s;
-        }
-
-        .choices button:hover {
-            background-color: #45a049;
-        }
-
-        #score {
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        /* Animation */
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Langues et Thème */
-        .language-theme {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1002;
-        }
-
-        .language-theme button {
-            background: none;
-            color: white;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            margin: 0 10px;
-        }
-
-        /* Thème sombre/clair */
-        .dark-theme {
-            background-color: #333;
-            color: white;
-        }
-
-        .light-theme {
-            background-color: #f0f0f0;
-            color: #333;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S.H Art Quiz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      direction: rtl;
+      background: #f8f9fa;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    .start-btn {
+      font-size: 2rem;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+      animation: pulse 2s infinite;
+    }
+    .start-btn:hover {
+      transform: scale(1.1);
+      background: #0056b3;
+    }
+    .option {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 18px;
+      position: relative;
+      animation: slideIn 0.5s ease-in-out;
+    }
+    .option:hover { background: #eee; }
+    .option.correct {
+      background: green;
+      color: white;
+      animation: flash 0.5s ease-in-out;
+    }
+    .option.wrong {
+      background: red;
+      color: white;
+      animation: shake 0.5s ease-in-out;
+    }
+    .score, .timer { font-size: 1.5rem; margin: 10px 0; }
+    .hidden { display: none; }
+    .footer { margin-top: 20px; padding: 10px; border-top: 1px solid #ddd; animation: slideIn 1s ease-in-out; }
+    @keyframes flash {
+      0% { background: #4CAF50; }
+      50% { background: #45a049; }
+      100% { background: #4CAF50; }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    @keyframes grow {
+      from { height: 0; }
+      to { height: var(--target-height); }
+    }
+    .action-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      animation: slideIn 0.5s ease-in-out;
+    }
+    .action-buttons i {
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin: 0 10px;
+      animation: pulse 2s infinite;
+    }
+    .help-used {
+      opacity: 0.5;
+      filter: grayscale(1);
+      cursor: not-allowed;
+    }
+    .friend-call {
+      font-size: 1.5rem;
+    }
+    .friend-call span {
+      font-size: 2rem;
+      color: #007bff;
+      display: block;
+      margin-top: 10px;
+    }
+    .audience-chart {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      height: 200px;
+      align-items: flex-end;
+      animation: slideIn 0.5s;
+    }
+    .chart-bar {
+      width: 40px;
+      background: #007bff;
+      transition: height 0.5s ease-in-out;
+      position: relative;
+      animation: grow 0.5s ease-in-out;
+    }
+    .chart-bar::after {
+      content: attr(data-percent);
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #333;
+    }
+    /* Modal styles */
+    #modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    /* Ensure modal is hidden on load */
+    #modal.hidden { display: none; }
+    #modal .container {
+      position: relative;
+    }
+    #close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff4d4d;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <!-- Menu de navigation -->
-    <div class="menu-bar">
-        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
-        <div class="menu-links">
-            <a href="#">Accueil</a>
-            <a href="#" onclick="showInfo()">Sur Nous</a>
-            <a href="#">Autre Jeux</a>
-            <a href="#" onclick="showContactInfo()">Contact Informations</a>
-        </div>
+  <div class="container">
+    <h1>S.H Art Quiz</h1>
+    <button class="start-btn" id="start-btn" onclick="startGame()">ابدأ</button>
+    <div class="score hidden">النقاط: <span id="score">0</span></div>
+    <div class="timer hidden">الوقت المتبقي: <span id="time">5</span> ثوانٍ</div>
+    <div class="question hidden" id="question"></div>
+    <div id="options" class="hidden"></div>
+
+    <div class="action-buttons hidden" id="help-buttons">
+      <i id="help-audience" class="fas fa-users help-icon" onclick="audiencePoll()"></i>
+      <i id="help-remove" class="fas fa-times help-icon" onclick="removeTwoOptions()"></i>
+      <i id="help-call" class="fas fa-phone help-icon" onclick="callFriend()"></i>
     </div>
 
-    <!-- Titre du quiz -->
-    <div id="title">S.H Art Quizz</div>
-
-    <!-- Fenêtre d'info "Sur nous" -->
-    <div id="info-window" class="info-window">
-        <button class="close-btn" onclick="closeInfo()">X</button>
-        <h2>À propos de S.H Art</h2>
-        <p>S.H Art est une compagnie créée par Houche Saïd en Algérie. Il est un artiste dessinateur et un développeur web passionné.</p>
+    <div class="footer">
+      <p>تم تصميم البرنامج من طرف هوش سعيد</p>
+      <div class="copyright">© 2025 S.H Art. All rights reserved.</div>
     </div>
+  </div>
 
-    <!-- Fenêtre des informations de contact -->
-    <div id="contact-info-window" class="contact-info-window">
-        <button class="close-btn" onclick="closeContactInfo()">X</button>
-        <h2>Contact Informations</h2>
-        <p>Email: <a href="mailto:S.H_art@outlook.com" style="color: #fff;">S.H_art@outlook.com</a></p>
-        <p>Numéro: +213783339471</p>
-    </div>
+  <!-- Modal overlay (initially hidden) -->
+  <div id="modal" class="hidden"></div>
 
-    <!-- Boutons pour changer la langue et le thème -->
-    <div class="language-theme">
-        <button onclick="changeLanguage('fr')">Fr</button>
-        <button onclick="changeLanguage('ar')">عربي</button>
-        <button onclick="changeLanguage('en')">En</button>
-        <button onclick="toggleTheme()">🌙</button>
-    </div>
+  <script>
+    const questions = [
+      { question: "ما هو حاصل ضرب 7 × 8؟", options: ["54", "56", "62", "49"], correct: 1 },
+      { question: "ما هو العنصر الكيميائي الذي رمزه O؟", options: ["أكسجين", "ذهب", "حديد", "فضة"], correct: 0 },
+      { question: "من هو مخترع المصباح الكهربائي؟", options: ["أديسون", "نيوتن", "أينشتاين", "جاليليو"], correct: 0 },
+      { question: "ما هو أعلى جبل في العالم؟", options: ["كليمنجارو", "إيفرست", "الهيمالايا", "البيرينيه"], correct: 1 },
+      { question: "كم عدد ألوان قوس قزح؟", options: ["5", "6", "7", "8"], correct: 2 },
+      { question: "ما هو أكبر كوكب في المجموعة الشمسية؟", options: ["الأرض", "المريخ", "المشتري", "زحل"], correct: 2 },
+      { question: "ما هو اسم أطول نهر في العالم؟", options: ["النيل", "الأمازون", "الغانج", "الميزوري"], correct: 1 },
+      { question: "من هو مؤلف رواية 1984؟", options: ["جورج أورويل", "ألدوس هكسلي", "مارك توين", "إرنست همنغواي"], correct: 0 },
+      { question: "ما هو اسم أكبر محيط في العالم؟", options: ["المحيط الأطلسي", "المحيط الهادئ", "المحيط الهندي", "المحيط المتجمد الشمالي"], correct: 1 },
+      { question: "ما هو اسم أول إنسان سار على سطح القمر؟", options: ["نيل أرمسترونغ", "باز ألدرين", "يوري غاغارين", "مايكل كولينز"], correct: 0 },
+      { question: "ما هو اسم عاصمة اليابان؟", options: ["طوكيو", "سيول", "بكين", "بانكوك"], correct: 0 },
+      { question: "ما هو اسم أكبر حيوان على وجه الأرض؟", options: ["الفيل", "الحوت الأزرق", "الزرافة", "الدب القطبي"], correct: 1 },
+      { question: "ما هو اسم أول دولة استخدمت الطوابع البريدية؟", options: ["بريطانيا", "أمريكا", "فرنسا", "ألمانيا"], correct: 0 },
+      { question: "ما هو اسم أكبر صحراء في العالم؟", options: ["صحراء ساهارا", "صحراء أتاكاما", "صحراء غوبي", "صحراء كبرى"], correct: 0 },
+      { question: "ما هو اسم أول فيلم كرتوني طويل؟", options: ["بياض الثلج", "الأميرة النائمة", "الأسد الملك", "فروزن"], correct: 0 }
+    ];
 
-    <!-- Contenu du quiz -->
-    <div id="quiz-container">
-        <h1>S.H Art Quizz</h1>
-        <div id="question"></div>
-        <div id="choices" class="choices"></div>
-        <button id="next" onclick="nextQuestion()">Suivant</button>
-        <div id="score"></div>
-    </div>
+    let currentQuestion = 0;
+    let score = 0;
+    let timeLeft = 5;
+    let timer;
+    let helpUsed = { audiencePoll: false, removeTwoOptions: false, callFriend: false };
 
-    <footer>
-        <p>2025 © Tous les droits sont réservés - S.H Art</p>
-        <div>
-            <a href="https://www.facebook.com/profile.php?id=61557417475097" target="_blank">Facebook</a> |
-            <a href="https://www.instagram.com/s.h___art?igsh=MTV4aWw4OHhmaWtldw==" target="_blank">Instagram</a> |
-            <a href="https://youtube.com/@houche.said?si=t2JlPG5qohIbKnL8" target="_blank">YouTube</a>
-        </div>
-    </footer>
+    function startGame() {
+      document.getElementById("start-btn").style.display = "none";
+      document.querySelector(".score").classList.remove("hidden");
+      document.querySelector(".timer").classList.remove("hidden");
+      document.getElementById("question").classList.remove("hidden");
+      document.getElementById("options").classList.remove("hidden");
+      document.getElementById("help-buttons").classList.remove("hidden");
+      loadQuestion();
+      startTimer();
+    }
 
-    <script>
-        // Liste des questions de quiz (20 questions)
-        const questions = [
-            { question: "Quel est le plus grand océan du monde ?", choices: ["Atlantique", "Indien", "Arctique", "Pacifique"], answer: "Pacifique" },
-            { question: "Qui a écrit 'Les Misérables' ?", choices: ["Victor Hugo", "Emile Zola", "Molière", "Balzac"], answer: "Victor Hugo" },
-            { question: "Quel est le plus grand désert du monde ?", choices: ["Sahara", "Arctique", "Désert de Gobi", "Kalahari"], answer: "Sahara" },
-            { question: "Qui a inventé l'électricité ?", choices: ["Albert Einstein", "Nikola Tesla", "Thomas Edison", "Benjamin Franklin"], answer: "Nikola Tesla" },
-            { question: "Quel pays est le plus peuplé ?", choices: ["Chine", "Inde", "USA", "Russie"], answer: "Chine" },
-            { question: "Quelle est la capitale de la France ?", choices: ["Berlin", "Madrid", "Paris", "Rome"], answer: "Paris" },
-            { question: "Qui a peint la Mona Lisa ?", choices: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"], answer: "Leonardo da Vinci" },
-            { question: "En quelle année a eu lieu la Révolution française ?", choices: ["1789", "1776", "1815", "1799"], answer: "1789" },
-            { question: "Quel est le plus grand pays du monde ?", choices: ["Chine", "Canada", "Russie", "USA"], answer: "Russie" },
-            { question: "Quel est l'élément chimique dont le symbole est 'O' ?", choices: ["Or", "Oxygène", "Ozone", "Osmium"], answer: "Oxygène" },
-            { question: "Qui a écrit '1984' ?", choices: ["George Orwell", "Aldous Huxley", "Ray Bradbury", "J.R.R. Tolkien"], answer: "George Orwell" },
-            { question: "Quel est le plus long fleuve du monde ?", choices: ["Nil", "Amazone", "Yangtsé", "Mississippi"], answer: "Nil" },
-            { question: "Quel pays a inventé les Jeux Olympiques ?", choices: ["France", "Grèce", "Italie", "Allemagne"], answer: "Grèce" },
-            { question: "Quelle est la plus haute montagne du monde ?", choices: ["K2", "Everest", "Mont Blanc", "Makalu"], answer: "Everest" },
-            { question: "En quelle année a été lancée la première mission spatiale humaine ?", choices: ["1961", "1957", "1969", "1975"], answer: "1961" },
-            { question: "Quel est l'instrument utilisé pour mesurer la température ?", choices: ["Baromètre", "Thermomètre", "Anémomètre", "Hygromètre"], answer: "Thermomètre" },
-            { question: "Qui a fondé Microsoft ?", choices: ["Steve Jobs", "Bill Gates", "Elon Musk", "Mark Zuckerberg"], answer: "Bill Gates" },
-            { question: "Quel est l'animal le plus rapide du monde ?", choices: ["Guépard", "Lion", "Aigle", "Requin blanc"], answer: "Guépard" },
-            { question: "Combien de continents existe-t-il sur Terre ?", choices: ["5", "6", "7", "8"], answer: "7" },
-            { question: "Quel est l'organe principal de la respiration chez l'humain ?", choices: ["Poumons", "Cœur", "Reins", "Foie"], answer: "Poumons" },
-            { question: "Quelle est la première lettre de l'alphabet ?", choices: ["A", "B", "C", "Z"], answer: "A" },
-            { question: "Qui a découvert l'Amérique ?", choices: ["Christophe Colomb", "Marco Polo", "Ferdinand Magellan", "Hernan Cortés"], answer: "Christophe Colomb" }
-        ];
+    function loadQuestion() {
+      if (currentQuestion >= questions.length) {
+        alert(`انتهى الاختبار! نقاطك النهائية: ${score}`);
+        location.reload();
+        return;
+      }
+      let q = questions[currentQuestion];
+      document.getElementById("question").textContent = q.question;
+      document.getElementById("options").innerHTML = q.options.map((opt, i) =>
+        `<button class="option" onclick="checkAnswer(this, ${i})">${opt}</button>`
+      ).join('');
+      timeLeft = 5;
+      document.getElementById("time").textContent = timeLeft;
+      startTimer();
+    }
 
-        let currentQuestion = 0;
-        let score = 0;
-
-        // Fonction pour charger une question
-        function loadQuestion() {
-            const q = questions[currentQuestion];
-            document.getElementById('question').textContent = q.question;
-
-            const choicesDiv = document.getElementById('choices');
-            choicesDiv.innerHTML = '';
-            q.choices.forEach(choice => {
-                const button = document.createElement('button');
-                button.textContent = choice;
-                button.onclick = () => checkAnswer(choice);
-                choicesDiv.appendChild(button);
-            });
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("time").textContent = timeLeft;
+        if (timeLeft === 0) {
+          clearInterval(timer);
+          alert("انتهى الوقت! لقد خسرت.");
+          location.reload();
         }
+      }, 1000);
+    }
 
-        // Vérifier la réponse
-        function checkAnswer(choice) {
-            const q = questions[currentQuestion];
-            if (choice === q.answer) {
-                score++;
-            }
-            document.getElementById('score').textContent = `Score: ${score}/${questions.length}`;
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                loadQuestion();
-            } else {
-                document.getElementById('score').textContent = `Quiz terminé! Ton score est ${score}/${questions.length}.`;
-            }
-        }
+    function pauseTimer() {
+      clearInterval(timer);
+    }
 
-        // Passer à la question suivante
-        function nextQuestion() {
-            loadQuestion();
-        }
+    function resumeTimer() {
+      startTimer();
+    }
 
-        // Afficher/fermer le menu
-        function toggleMenu() {
-            const links = document.querySelector('.menu-links');
-            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        // Afficher la fenêtre "Sur Nous"
-        function showInfo() {
-            document.getElementById('info-window').style.display = 'block';
-        }
-
-        // Fermer la fenêtre "Sur Nous"
-        function closeInfo() {
-            document.getElementById('info-window').style.display = 'none';
-        }
-
-        // Afficher la fenêtre "Contact Informations"
-        function showContactInfo() {
-            document.getElementById('contact-info-window').style.display = 'block';
-        }
-
-        // Fermer la fenêtre "Contact Informations"
-        function closeContactInfo() {
-            document.getElementById('contact-info-window').style.display = 'none';
-        }
-
-        // Changer la langue
-        function changeLanguage(language) {
-            // Implémenter le changement de langue ici
-            alert("Langue changée à: " + language);
-        }
-
-        // Changer le thème
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            document.body.classList.toggle('light-theme');
-        }
-
-        // Charger la première question
+    function checkAnswer(element, index) {
+      clearInterval(timer);
+      let correctIndex = questions[currentQuestion].correct;
+      if (index === correctIndex) {
+        element.classList.add("correct");
+        score += 2;
+        document.getElementById("score").textContent = score;
+      } else {
+        element.classList.add("wrong");
+        document.querySelectorAll(".option")[correctIndex].classList.add("correct");
+        setTimeout(() => {
+          alert("إجابة خاطئة! لقد خسرت.");
+          location.reload();
+        }, 1000);
+        return;
+      }
+      setTimeout(() => {
+        currentQuestion++;
         loadQuestion();
-    </script>
+      }, 1000);
+    }
+
+    // Helper function to display a modal overlay for help actions.
+    function showHelpModal(content) {
+      pauseTimer();
+      // Hide answer options while help is active.
+      document.getElementById("options").classList.add("hidden");
+      const modal = document.getElementById("modal");
+      modal.innerHTML = `
+        <div class="container">
+          <button id="close-modal">X</button>
+          ${content}
+        </div>
+      `;
+      modal.classList.remove("hidden");
+      document.getElementById("close-modal").onclick = function() {
+        modal.classList.add("hidden");
+        document.getElementById("options").classList.remove("hidden");
+        resumeTimer();
+      };
+    }
+
+    function audiencePoll() {
+      if (helpUsed.audiencePoll) return;
+      helpUsed.audiencePoll = true;
+      document.getElementById("help-audience").classList.add("help-used");
+      const correctIndex = questions[currentQuestion].correct;
+      let chartHTML = '<div class="audience-chart">';
+      questions[currentQuestion].options.forEach((_, i) => {
+        const percent = i === correctIndex ? Math.floor(Math.random() * 30 + 70) : Math.floor(Math.random() * 30);
+        chartHTML += `
+          <div class="chart-bar" style="height: ${percent}%;" data-percent="${percent}%">
+            ${String.fromCharCode(65 + i)}
+          </div>
+        `;
+      });
+      chartHTML += '</div>';
+      showHelpModal(chartHTML);
+    }
+
+    function removeTwoOptions() {
+      if (helpUsed.removeTwoOptions) return;
+      helpUsed.removeTwoOptions = true;
+      document.getElementById("help-remove").classList.add("help-used");
+      const correctIndex = questions[currentQuestion].correct;
+      const options = Array.from(document.querySelectorAll('.option'))
+        .map((opt, i) => ({ element: opt, index: i }))
+        .filter(opt => opt.index !== correctIndex);
+      const toRemove = options.sort(() => Math.random() - 0.5).slice(0, 2);
+      toRemove.forEach(opt => {
+        opt.element.style.opacity = '0.3';
+        opt.element.style.transform = 'scale(0.9)';
+        opt.element.style.pointerEvents = 'none';
+        opt.element.style.animation = 'shake 0.5s';
+      });
+      showHelpModal('<p>تم حذف خيارين. اضغط X لاستئناف اللعبة.</p>');
+    }
+
+    function callFriend() {
+      if (helpUsed.callFriend) return;
+      helpUsed.callFriend = true;
+      document.getElementById("help-call").classList.add("help-used");
+      const correctIndex = questions[currentQuestion].correct;
+      const correctAnswer = questions[currentQuestion].options[correctIndex];
+      const content = `
+        <div class="friend-call">
+          📞 صديق يقول:
+          <br>
+          <span>"أعتقد أن الإجابة هي ${correctAnswer}"</span>
+        </div>
+      `;
+      showHelpModal(content);
+    }
+  </script>
 </body>
 </html>
